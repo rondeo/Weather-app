@@ -1,0 +1,23 @@
+{
+  "name": "we",
+  "version": "1.0.0",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "ejs": "^2.6.1",
+    "express": "^4.17.1",
+    "hbs": "^4.0.4",
+    "lodash": "^4.17.11",
+    "mongodb": "^3.2.7",
+    "mongoose": "^5.5.13",
+    "nodemon": "^1.19.1",
+    "npm": "^6.9.0",
+    "request": "^2.88.0"
+  },
+  "description": ""
+}

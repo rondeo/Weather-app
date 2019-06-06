@@ -1,0 +1,60 @@
+<%- include("header")  -%>
+
+<div class="container-fluid">
+
+
+   <!-- back to home -->
+
+   <div class="row form-row">
+      <div class="col-lg-12">
+          <form action="/backtohome" method="post">
+              <button class="btn btn-sm btn-light btn-block" type="submit">Back to home</button>
+          </form>
+      </div>
+  </div>
+
+    <h1 class="">Write to Us</h1>
+
+    <form action="/weatherbug" method="post" class="form-signin form-sign">
+            <div class="form-row">
+              <div class="col-md-6">
+                <input name="fName" type="text" class="form-control" id="validationDefault01" placeholder="First name"  required>
+              </div>
+              <div class="col-md-6">
+                <input name="lName" type="text" class="form-control" id="validationDefault02" placeholder="Last name"   required>
+              </div>
+            </div>
+            <div class="form-row">
+              <div class="col-md-6 mb-3">
+                <input name="cityName" type="text" class="form-control" id="validationDefault03" placeholder="City" required>
+              </div>
+              <div class="col-md-3 mb-3">
+                <input name="stateName" type="text" class="form-control" id="validationDefault04" placeholder="State" required>
+              </div>
+              <div class="col-md-3 mb-3">
+                <input name="zipCode" type="text" class="form-control" id="validationDefault05" placeholder="Zip" required>
+              </div>
+            </div>
+
+
+            <div class="mb-3">
+                    <textarea name="feedback" class="form-control" id="validationTextarea" placeholder="Your feedback is here ...." required></textarea>
+                  </div>
+
+
+            <div class="form-group">
+              <div class="form-check">
+                <input name="checkbox" class="form-check-input" type="checkbox" value="" id="invalidCheck2" required>
+                <label class="form-check-label" for="invalidCheck2">
+                  Agree to terms and conditions
+                </label>
+              </div>
+            </div>
+            <button class="btn btn-primary" type="submit">Submit form</button>
+          </form>
+
+
+</div>
+
+
+<%- include("footer")  -%>
