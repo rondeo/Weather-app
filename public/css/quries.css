@@ -17,18 +17,23 @@
 
 /* HOME SECTIONS */
 
-.navbar {
-    min-height: 120px;
+   .navbar {
+    min-height: 110px;
 }
 
-.container-fluid {
+   .container-fluid {
     height: 900px;
     overflow: hidden;
 }
 
-.row-box {
-    margin: 80px auto ;
+   .row-box {
+    margin: 70px auto ;
   }
+   
+  #home {
+      width: 200px; 
+  }
+
 
   /* ABOUT SECTIONS */
 
@@ -47,6 +52,7 @@
    
     padding:100px 15px 15px;
   }
+
 
 
 }
