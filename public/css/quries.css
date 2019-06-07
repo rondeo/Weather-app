@@ -1,0 +1,68 @@
+/* Big tablet to 1200px  */
+
+@media only screen and (max-width: 1200px){
+
+}
+
+
+/* For Small tablet to big tablet: from 768px to 1023px */
+
+@media only screen and (max-width: 1023px){
+
+}
+
+/* Small phones to small tablets: from 480px to 767 */
+
+@media only screen and (max-width: 767px){
+
+/* HOME SECTIONS */
+
+.navbar {
+    min-height: 120px;
+}
+
+.container-fluid {
+    height: 900px;
+    overflow: hidden;
+}
+
+.row-box {
+    margin: 80px auto ;
+  }
+
+  /* ABOUT SECTIONS */
+
+  .about-box {
+    margin-top: 140px; 
+}
+
+.responsive {
+    margin-top: 40px; 
+    text-align: center; 
+}
+
+/* SIGN UP SECTIONS */
+
+.form-signin {
+   
+    padding:100px 15px 15px;
+  }
+
+
+}
+
+/* Small phones: from 0 to 480px */
+
+@media only screen and (max-width: 480px){
+
+    h1 {
+        text-align: center;
+        color: yellow ;
+    }
+
+    .box {
+        padding-top: 150px;
+    }
+
+
+}
