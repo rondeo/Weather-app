@@ -15,9 +15,11 @@ app.use(express.static(__dirname+'/public'));
 app.set('view engine', 'ejs');
 
 var item ; 
-var timeZone  ; 
+var regionName  ; 
 var dayNight ; 
 var temperature ; 
+var dayStatus ; 
+var countryName ; 
 
 // database ################################################################
 
@@ -117,64 +119,33 @@ app.get("/feedback_thanks", (req, res)=>{
     res.render("feedbackthanks") ; 
 }); 
 
-// app.get("/data-delete", (req, res)=>{
-//     Person.deleteMany({firstName: "bhawana"}, (err)=>{
-//         console.log(err); 
-//     }); 
-// });
+
+
+//######################################################################################
 
 app.get("/", (req, res)=>{
-
     if(item === undefined){
-        item = "Sardarshahar" ;
+        item = "Churu" ;
     }
 
-   request(`https://api.opencagedata.com/geocode/v1/json?q=${item}&key=3ece9e4e6666444490c8ba1eb324dc7c`, (err, res, body)=>{
-   if(err){
-        console.log(err) ;
-   } else { 
+    request(`https://api.apixu.com/v1/current.json?key=8939f05ef73f4783bab60805190806&q=${item}`, (err, res, body)=>{
 
-        var body = JSON.parse(body) ; 
-        // console.log(body.timestamp.created_http);
-        //   console.log(body.results[0].bounds.northeast.lat) ; 
-        //   console.log(body.results[0].bounds.northeast.lng) ; 
-        // console.log(body.results[0].annotations.flag);
-        // console.log(body.results[0].annotations.timezone.name);
-        // console.log(body.results[0].components.postcode);
-        // console.log(body.results[0].components.city_district);
+        if(err){
+            throw new Error(`Somthing went wrong in getting data from server. ${err}`);
+        } 
+        else{
+            const body1 = JSON.parse(body); 
 
-        timeZone = body.results[0].annotations.timezone.name; 
-        
-        let lat = body.results[0].bounds.northeast.lat ; 
-        let lng = body.results[0].bounds.northeast.lng ; 
+            dayNight = body1.current.is_day ; 
+            temperature = body1.current.temp_c; 
+            regionName = body1.location.country + "/" +body1.location.region; 
+            dayStatus = body1.current.condition.text ;   
+        }
+    });
 
-        var baseUrl = "https://api.darksky.net/forecast/4fe15aea7f078f333f5a73663e84d722/" ;
-        var finalUrl = baseUrl+lat+","+lng ; 
-        
-      request(finalUrl, (err, res, body)=>{
-      if(err){
-        console.log(err); 
-      } else {
-         var body = JSON.parse(body) ; 
-         //console.log(body.timezone);
-        // console.log(body.currently.icon); 
-         //console.log((body.currently.temperature-32)*5/9+" degree celsius");
-
-         timeZone = body.timezone; 
-         dayNight = body.currently.icon; 
-         temperature = _.round((body.currently.temperature -32)*5/9, 2); 
-
-    }
-});
-    }
-});
-
-        // res.redirect("/");
-    
     item = _.upperFirst(item) ; 
-         
-    res.render("home", {nameOfCity: item, timeZone:timeZone, dayNight: dayNight, temperature: temperature}); 
-
+        
+    res.render("home", {nameOfCity: item, regionName:regionName, dayNight: dayNight, temperature: temperature, dayStatus:dayStatus}); 
 });
 
 // geting post request from forms#########################################
@@ -192,9 +163,6 @@ app.post("/backtohome",(req,res)=>{
 
 
  app.post("/signup", (req, res)=>{
-    // console.log(req.body) ; 
-    
-  //  let signupData = JSON.parse(req.body); 
 
     const personData = new Person(req.body) ; 
 
@@ -205,22 +173,17 @@ app.post("/backtohome",(req,res)=>{
  }); 
 
  app.post("/login", (req, res)=>{
-    //   console.log(req.body.email);
-    //   console.log(req.body.password); 
      Person.find((err, people)=>{
          if(err){
-             console.log(err); 
+             throw new Error('Unable to login!'); 
          } else {
     
              people.forEach((item)=>{
               
                  if((item.email === req.body.email) && (item.password === req.body.password)){
-                       console.log(item.email===req.body.email && item.password === req.body.password); 
-                    //   console.log(item.password ); 
-                    // mongoose.connection.close(); 
                     res.redirect("/"); 
                  } 
-             }) ;
+             });
          }
      }); 
      
@@ -228,11 +191,13 @@ app.post("/backtohome",(req,res)=>{
 
  
   app.post("/weatherbug", (req, res)=>{
-    //   console.log(req.body); 
-    const weather = new Weather(req.body);
-    weather.save();
-    
-    res.redirect("/feedback_thanks"); 
+    try{
+        const weather = new Weather(req.body);
+        weather.save();
+        res.redirect("/feedback_thanks"); 
+    }catch(e){
+        throw new Error('Something went wrong!'); 
+    }
   }); 
 
   

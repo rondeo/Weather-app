@@ -52,11 +52,7 @@
 
         <div class="container-fluid">
             <div class="container box">
-                <!-- <h1><%= nameOfCity %></h1>
-                <h1><%= timeZone %></h1>
-                <h1><%= dayNight %></h1>
-                <h1><%= temperature %> <img src="/img/degree-celsius.png" alt=""> </h1> -->
-      
+              
                 <div class="row row-box">
                   <div class="col-lg-12">
                     <h1><%= nameOfCity %></h1>
@@ -64,23 +60,28 @@
                 </div>
                 <div class="row row-box">
                     <div class="col-lg-12">
-                        <h1><%= timeZone %></h1>
+                        <h1><%= regionName %></h1>
                     </div>
                   </div>
                 <div class="row row-box">
                   <div class="col-lg-6">
-                      <h1><%= dayNight %></h1>
+                      <!-- <h1><%= dayNight %></h1> -->
+                     <% if(dayNight === 1){ %>
+                        <h1>Day</h1>
+                  <%    } else{    %>
+                        <h1>Night</h1>
+                  <%     }   %>
                   </div>
                   <div class="col-lg-6 column">
-                <%    if(dayNight==="clear-day"){   %>
+                <%    if(dayNight=== 1){   %>
                       <i class="fas fa-sun "></i>
-                <%    } else if (dayNight ==="clear-night"){ %>
+                <%    } else if (dayNight === 0){ %>
                       <i class="fas fa-moon "></i>
-                <%      } else if (dayNight === "rain"){     %>
+                <%      } else if (dayStatus === "Light rain"){     %>
                       <i class="fas fa-cloud-rain "></i>
-               <%     } else if (dayNight === "partly-cloudy-day") {  %>
+               <%     } else if (dayStatus === "Partly cloudy") {  %>
                      <i class="fas fa-cloud-sun "></i>
-               <%     } else if (dayNight === "partly-cloudy-night"){  %>
+               <%     } else if (dayStatus === "partly-cloudy-night"){  %>
                      <i class="fas fa-cloud-moon-rain "></i>
                <%     }   %>
                   </div>
