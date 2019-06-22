@@ -19,7 +19,6 @@
     "mongodb": "^3.2.7",
     "mongoose": "^5.5.13",
     "nodemon": "^1.19.1",
-    "npm": "^6.9.0",
     "request": "^2.88.0"
   },
   "description": ""
